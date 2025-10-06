@@ -3,7 +3,8 @@ import Login from './login';             // asumimos que los componentes están 
 import Registro from './registro';
 import DisenoCamiseta from './camiseta';
 import GaleriaCamisetas from './votar';
-
+import Foto from './foto';
+ 
 function App() {
   const [vistaActual, setVistaActual] = useState('login');
   const [token, setToken] = useState(null);
@@ -11,7 +12,8 @@ function App() {
   // Cuando el login es exitoso:
   const handleLoginSuccess = (tokenRecibido) => {
     setToken(tokenRecibido);
-    setVistaActual('diseno');   // pasamos a la vista principal de diseño
+    console.log('Token recibido en App:', tokenRecibido);
+    setVistaActual('foto');   // pasamos a la vista principal de diseño
   };
 
   // Funciones para cambiar entre vistas (login/registro)
@@ -40,6 +42,9 @@ function App() {
           }
           {vistaActual === 'galeria' && 
             <GaleriaCamisetas token={token} onVolverDiseño={volverADiseno} onLogout={handleLogout} />
+          }
+           {vistaActual === 'foto' && 
+            <Foto token={token} onLogout={handleLogout} />
           }
         </>
       ) : (
